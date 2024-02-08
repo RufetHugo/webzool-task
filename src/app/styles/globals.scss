@@ -2,7 +2,7 @@
 @import "slick-carousel/slick/slick.css";
 @import "slick-carousel/slick/slick-theme.css";
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -47,6 +47,10 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+p, span, button, li, div {
+  font-family: Lato, sans-serif;
 }
 
 /*====================================================================================================================*/
@@ -159,6 +163,19 @@ a {
     width: var(--navbar-category-width);
   }
 
+  .btn-close {
+    position: absolute;
+    top: 0;
+    left: calc(50% - 20px);
+    margin-top: -50px !important;
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    color: #000;
+    border-radius: 50%;
+    opacity: 1 !important;
+  }
+
   .category-link{
 
     .category-icon {
@@ -243,12 +260,21 @@ a {
   border: none !important;
 }
 
+.font-family-Poppins {
+  font-family: 'Poppins', sans-serif !important;
+}
+
 .border-color-muted  {
   border-color: rgb(247, 247, 247) !important;
 }
 
 .min-width-max-content {
   min-width: max-content !important;
+}
+
+.top-radius-20 {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 
 /*====================================================================================================================*/
@@ -302,9 +328,7 @@ a {
     background-repeat: no-repeat;
   }
 
-  @media (max-width: 767px) {
-    padding-top: calc(var(--header-height) + 20);
-  }
+    padding-top: calc(var(--header-height) + 20) !important;
 }
 
 

@@ -8,8 +8,6 @@ import Footer from '../components/footer/Footer'
 
 import BootstrapClient from "@/components/BootstrapClient";
 import SidebarCategories from "@/components/sidebar-categories/page";
-import Products from "@/components/products/page";
-import {useRouter} from "next/navigation";
 import axios from "axios";
 import SimpleSlider from "@/components/simpleSlider/page";
 import {Provider} from "react-redux";
@@ -17,19 +15,8 @@ import store from "../lib/store/store";
 
 const inter = Inter({subsets: ["latin"]});
 
-
 export default function RootLayout({children}) {
-
-    const router = useRouter()
     const [categories, setCategory] = useState(null);
-
-    const changeQueryParam = (newQueryParam) => {
-        console.log(newQueryParam, router.pathname, router, 'sd');
-        router.push({
-            pathname: `${router.pathname}/`,
-            query: {filter: newQueryParam},
-        });
-    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -40,19 +27,19 @@ export default function RootLayout({children}) {
             }
         };
         window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     useEffect(() => {
-        getCategories();
+        getCategories()
     }, []);
 
     const getCategories = async () => {
+
         try {
-            const response = await axios.get('http://64.226.66.94/api/categories/');
-            setCategory(response.data);
+            const {data} = await axios.get('http://64.226.66.94/api/categories');
+            setCategory(data);
+
         } catch (error) {
             console.error('Xəta!:', error);
         }
@@ -71,19 +58,26 @@ export default function RootLayout({children}) {
                     <div className="row w-100 justify-content-center">
                         <div className="col-12 col-lg-7">
 
-                            <div className="text-center mb-5">
-                                <h1 className="fw-bold mb-3">
+                            <div className="text-center my-5">
+                                <h1 className="fw-bold mb-3 f-45 font-family-Poppins d-none d-md-block">
                                     Groceries Delivered in 90 Minute
                                 </h1>
 
-                                <p className="text-muted">
+                                <p className="text-muted f-15 f-md-19">
                                     Get your healthy foods & snacks delivered at your doorsteps all day everyday
                                 </p>
                             </div>
 
                             <div className="mx-md-5">
-                                <div className="d-flex search input-group bg-white" role="search">
-                                    <div className="input-group-text m-1 border-0 main-color f-14 rounded">
+                                <div className="d-flex input-group bg-f7 rounded d-md-none mb-3" role="search">
+                                    <div className="input-group-text m-1 border-0 f-14">
+                                        <span className="mdi mdi-24px mdi-magnify"></span>
+                                    </div>
+                                    <input className="form-control border-0 bg-f7" type="search"
+                                           placeholder="Search your products from here" aria-label="Search"></input>
+                                </div>
+                                <div className="d-none d-md-flex search input-group bg-white" role="search">
+                                    <div className="input-group-text m-1 border-0 main-color f-14 rounded fw-bold">
                                         Grocery
                                     </div>
                                     <input className="form-control border-0" type="search"
@@ -92,7 +86,7 @@ export default function RootLayout({children}) {
                                         className="btn btn-outline-success input-group-text main-bg text-white border-0"
                                         type="submit">
                                         <div className="d-flex align-items-center px-3">
-                                            <span className="mdi mdi-24px mdi-magnify"></span>
+                                            <span className="mdi mdi-24px mdi-magnify me-1"></span>
                                             <div className={'fw-bold'}>Search</div>
                                         </div>
                                     </button>
@@ -114,10 +108,13 @@ export default function RootLayout({children}) {
                 <div className="bg-green">
                     <div className="d-md-flex w-100">
 
-                        <SidebarCategories category={categories}/>
+                        <SidebarCategories categories={categories}/>
 
-                        {children}
-                        {/*<Products/>*/}
+                        <main className="w-100">
+                            <div className="p-3 p-lg-4">
+                                {children}
+                            </div>
+                        </main>
 
                     </div>
                 </div>
