@@ -1,13 +1,14 @@
 'use client';
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {useParams, useRouter} from "next/navigation";
+import {useParams, usePathname, useRouter} from "next/navigation";
 import {useDispatch, useSelector} from "react-redux";
 import {atCategories} from "@/lib/actions";
 
 export default function Product() {
     const router = useParams()
     const dispatch = useDispatch();
+    const pathname = usePathname();
     const [categories, setCategory] = useState(null);
 
     useEffect(() => {
@@ -15,11 +16,10 @@ export default function Product() {
         console.log(router, 'slug');
     }, []);
 
-
     const getCategories = async () => {
         try {
-            const response = await axios.get(`http://64.226.66.94/api/categories/${router.id}`);
-            setCategory(response.data);
+            const {data} = await axios.get(`http://64.226.66.94/api/categories/${router.id}`);
+            setCategory(data);
         } catch (error) {
             console.error('Error!:', error);
         }
@@ -31,7 +31,7 @@ export default function Product() {
                 <div className="row">
                     {categories && categories.products ? (
                         categories.products.map((item, index) => (
-                            <div key={index} className="col-12 col-md-4 col-lg-3 col-xl-2 mb-3">
+                            <div key={index} className="col-12 col-md-4 col-lg-3 mb-3">
                                 <div className="bg-white rounded h-100">
                                     <div className="ratio ratio-1x1">
                                         <img src={`http://64.226.66.94/${item.main_image}`}
