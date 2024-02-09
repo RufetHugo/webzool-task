@@ -18,33 +18,36 @@ export default function sidebarCategories({categories}) {
 
             <div className="navbar-category bg-white">
 
-                <div className="offcanvas offcanvas-bottom d-md-none top-radius-20 overflow-auto" tabIndex="-1" id="offcanvasBottom"
+                <div className="offcanvas offcanvas-bottom d-md-none top-radius-20" tabIndex="-1" id="offcanvasBottom"
                      aria-labelledby="offcanvasBottomLabel" data-bs-scroll="true">
 
                     <div className="offcanvas-header">
-                        <h5 className="offcanvas-title" id="offcanvasBottomLabel">Offcanvas bottom</h5>
 
                         <button type="button" className="btn-close p-0" data-bs-dismiss="offcanvas" aria-label="Close">
                             <span className="mdi mdi-24px mdi-close"></span>
                         </button>
                     </div>
 
-                    {categories ? (
-                        categories.map((item, index) => (
-                            <div key={index} className="px-2 py-3">
-                                <div onClick={() => changeQueryParam(item.id)} className="category-link d-flex">
-                                    <div className="category-icon d-flex justify-content-center mx-3" dangerouslySetInnerHTML={{ __html: item.icon_svg.replace('width="60"', 'width="22"').replace('height="60"', 'height="22"') }}/>
-                                    <div>{item.title}</div>
+                    <div className=" overflow-auto">
+                        {categories ? (
+                            categories.map((item, index) => (
+
+                                <div key={index} className="px-2 py-3">
+                                    <div onClick={() => changeQueryParam(item.id)} className="category-link d-flex">
+                                        <div className="category-icon d-flex justify-content-center mx-3" dangerouslySetInnerHTML={{ __html: item.icon_svg.replace('width="60"', 'width="22"').replace('height="60"', 'height="22"') }}/>
+                                        <div>{item.title}</div>
+                                    </div>
                                 </div>
+                            ))
+                        ) : (
+                            <div>
+                                <span className="placeholder col-6"></span>
+                                <span className="placeholder w-75"></span>
+                                <span className="placeholder"></span>
                             </div>
-                        ))
-                    ) : (
-                        <div>
-                            <span className="placeholder col-6"></span>
-                            <span className="placeholder w-75"></span>
-                            <span className="placeholder"></span>
-                        </div>
-                    ) }
+                        ) }
+                    </div>
+
                 </div>
 
                 <div className="p-4 d-none d-md-block">

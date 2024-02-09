@@ -1,7 +1,8 @@
 'use client';
 import axios from "axios";
-import {useState} from "react";
+import React, {useState} from "react";
 import {useParams} from "next/navigation";
+import ProductList from "@/components/products/page";
 
 export default function Product() {
     const router = useParams()
@@ -16,7 +17,5 @@ export default function Product() {
         }
     }
 
-    return (
-        'aaaaa'
-    )
+    return <ProductList endpoint={`products`}/>
 }

@@ -159,6 +159,10 @@ p, span, button, li, div {
 .navbar-category {
   width: 0;
 
+  .offcanvas-bottom {
+    height: 50vh !important;
+  }
+
   @media (min-width: 768px) {
     width: var(--navbar-category-width);
   }
